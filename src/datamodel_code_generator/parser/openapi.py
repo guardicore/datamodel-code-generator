@@ -547,6 +547,8 @@ class OpenAPIParser(JsonSchemaParser):
 
     def parse_raw(self) -> None:  # noqa: PLR0912
         for source, path_parts in self._get_context_source_path_parts():  # noqa: PLR1702
+            if path_parts and path_parts[-1] in ('changelog', 'version'):
+                continue
             if self.validation:
                 warn(
                     "Deprecated: `--validation` option is deprecated. the option will be removed in a future "

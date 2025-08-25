@@ -51,7 +51,7 @@ class ConstraintsBase(_BaseModel):
 
         class Config:
             arbitrary_types_allowed = True
-            keep_untouched = (cached_property,)
+            ignored_types = (cached_property,)
 
     @cached_property
     def has_constraints(self) -> bool:

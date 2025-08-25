@@ -257,7 +257,7 @@ class JsonSchemaObject(BaseModel):
 
         class Config:
             arbitrary_types_allowed = True
-            keep_untouched = (cached_property,)
+            ignored_types = (cached_property,)
             smart_casts = True
 
     if not TYPE_CHECKING:

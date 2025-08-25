@@ -129,10 +129,9 @@ class DataModelField(DataModelFieldV1):
         data.pop("unique_items", None)
 
         if "union_mode" in data:
+            union_mode = data.pop("union_mode")
             if self.data_type.is_union:
-                data["union_mode"] = data.pop("union_mode").value
-            else:
-                data.pop("union_mode")
+                data["union_mode"] = union_mode.value if isinstance(union_mode, UnionMode) else union_mode
 
         # **extra is not supported in pydantic 2.0
         json_schema_extra = {k: v for k, v in data.items() if k not in self._DEFAULT_FIELD_KEYS}
