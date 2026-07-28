@@ -964,6 +964,8 @@ class OpenAPIParser(JsonSchemaParser):
         """Parse OpenAPI specification including schemas, paths, and operations."""
         try:
             for source, path_parts in self._get_context_source_path_parts():
+                if path_parts and path_parts[-1] in ('changelog', 'version'):
+                    continue
                 if self.validation:
                     warn_deprecated("cli.validation", stacklevel=2)
 

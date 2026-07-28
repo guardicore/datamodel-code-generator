@@ -17,7 +17,7 @@ from pydantic import Field, ValidationError, field_validator, model_validator
 from pydantic.alias_generators import to_camel, to_pascal, to_snake
 
 from datamodel_code_generator import Error
-from datamodel_code_generator.enums import AliasGenerator
+from datamodel_code_generator.enums import AliasGenerator, UnionMode
 from datamodel_code_generator.imports import IMPORT_ANNOTATED, IMPORT_ANY, IMPORT_DICT, IMPORT_UNION, Import
 from datamodel_code_generator.model import _rebuild_model_with_datamodel_namespace
 from datamodel_code_generator.model.base import (
@@ -454,10 +454,9 @@ class DataModelField(_PydanticBaseDataModelField):
             data["frozen"] = True
 
         if "union_mode" in data:
+            union_mode = data.pop("union_mode")
             if self.data_type.is_union:
-                data["union_mode"] = data.pop("union_mode").value
-            else:
-                data.pop("union_mode")
+                data["union_mode"] = union_mode.value if isinstance(union_mode, UnionMode) else union_mode
 
         self._update_alias_for_alias_generator(data)
         has_alias = "alias" in data
