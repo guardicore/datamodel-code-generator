@@ -115,7 +115,7 @@ jobs:
       - name: Run Claude Code Analysis
         id: claude
         timeout-minutes: 10
-        uses: anthropics/claude-code-action@44423bdec74b97d67543eb16c110546762c110b2 # v1.0.181
+        uses: anthropics/claude-code-action@51db78a4b844e144f8d02425cb280435c04a3474 # v1.0.224
         with:
           # OAuth authentication for Max plan subscribers
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
